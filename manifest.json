@@ -1,0 +1,22 @@
+{
+    "name": "Briefeed",
+    "short_name": "Briefeed",
+    "description": "Votre agrégateur RSS personnel",
+    "start_url": "./",
+    "display": "standalone",
+    "background_color": "#07090b",
+    "theme_color": "#07090b",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://www.google.com/s2/favicons?domain=briefeed.app&sz=192",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://www.google.com/s2/favicons?domain=briefeed.app&sz=512",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
