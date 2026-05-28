@@ -6528,9 +6528,6 @@ function _cleanupViews(){
     document.getElementById('folderLogosBar').innerHTML='';
     document.getElementById('folderLogosBar').classList.remove('visible');
     document.getElementById('sourceLogosStrip')?.classList.add('hidden');
-    // Cacher le hero widget par défaut — il sera remontré sur accueil global
-    const hw=document.getElementById('homeWidget');
-    if(hw)hw.style.display='none';
 }
 
 // ── Séparateurs de jour ─────────────────────────────────────────
