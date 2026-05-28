@@ -510,79 +510,27 @@ a.iv-link { color:#FF6B35;text-decoration:none;font-weight:500; }
 
 /* ══ HEADER ══════════════════════════════════════════════════ */
 /* ══ HEADER ESTRELLA STYLE ═══════════════════════════════════════ */
-header{
-    position:fixed;top:0;left:0;right:0;
-    height:calc(80px + env(safe-area-inset-top,0px));
-    background:var(--header-bg);
-    backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
-    display:flex;flex-direction:column;
-    z-index:1000;
-    border-bottom:1px solid var(--border-mid);
-    padding-top:var(--safe-top);
-}
-.header-top-row{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:0 20px;
-    flex:1;
-}
-header .header-left,header .header-right{display:flex;align-items:center;gap:6px;min-width:80px;}
-header .header-right{justify-content:flex-end;}
-.header-logo-center{
-    flex:1;display:flex;align-items:center;justify-content:center;
-}
+
+
+header 
+header 
+
 /* ── Logo header éditorial (esprit intro) ── */
-.header-logo-editorial{
-    display:inline-flex;align-items:center;gap:9px;
-    text-decoration:none;user-select:none;
-}
-.header-logo-mark-sm{
-    width:22px;height:28px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;
-    opacity:.95;
-}
-.header-logo-mark-sm svg{width:100%;height:100%;display:block;}
-.header-logo-wordmark{
-    font-family:'Fraunces',Georgia,serif;
-    font-variation-settings:"opsz" 48;
-    font-style:italic;
-    font-weight:500;
-    font-size:21px;
-    letter-spacing:-.022em;
-    color:var(--text-primary);
-    line-height:1;
-}
-.header-bottom-line{
-    height:1px;
-    background:var(--border-mid);
-    margin:0 18px;
-    flex-shrink:0;
-}
-header .header-btn{
-    display:flex;align-items:center;justify-content:center;
-    width:34px;height:34px;
-    border-radius:99px;border:none;
-    background:transparent;
-    color:var(--text-secondary);
-    cursor:pointer;transition:opacity .18s,transform .15s,color .15s;
-    flex-shrink:0;
-}
-.header-btn:active{opacity:.6;transform:scale(.9);}
-header .header-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
-header .header-btn:hover{color:var(--text-primary);}
+
+
+
+
+
+header 
+
+header 
+header 
 /* Hamburger label style Estrella */
-.header-menu-btn{
-    display:flex;flex-direction:column;align-items:flex-start;gap:0;
-    border:none;background:none;cursor:pointer;padding:4px 0;
-    color:var(--text-secondary);transition:color .15s;
-}
-.header-menu-btn:active{color:var(--text-primary);}
-.header-menu-label{
-    font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-    color:inherit;font-family:-apple-system,BlinkMacSystemFont,sans-serif;
-    margin-bottom:5px;
-}
-.header-menu-lines{display:flex;flex-direction:column;gap:4px;}
-.header-menu-line{width:20px;height:1.5px;background:currentColor;border-radius:1px;transition:background .15s;}
+
+
+
+
+
 .theme-toggle-btn{display:flex;align-items:center;gap:7px;border:none;background:none;cursor:pointer;padding:4px 2px;}
 .theme-toggle-btn svg{width:14px;height:14px;fill:none;stroke:var(--text-tertiary);stroke-width:2;stroke-linecap:round;flex-shrink:0;transition:stroke .25s;}
 .tgl-track{width:42px;height:25px;background:var(--surface-3);border-radius:13px;position:relative;transition:background .28s;border:1px solid var(--border-mid);flex-shrink:0;}
@@ -767,7 +715,7 @@ body.light .nav-layer-search-bar svg{stroke:rgba(0,0,0,.4);}
 body.light #navSearchResults::before{background:rgba(245,244,238,0.82);}
 
 /* ══ LAYOUT ══════════════════════════════════════════════════ */
-.page-wrapper{display:flex;justify-content:center;width:100%;max-width:100vw;min-height:100dvh;padding-top:calc(96px + env(safe-area-inset-top,0px));overflow-x:hidden;box-sizing:border-box;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));}
+.page-wrapper{display:flex;justify-content:center;width:100%;max-width:100vw;min-height:100dvh;padding-top:env(safe-area-inset-top,0px);overflow-x:hidden;box-sizing:border-box;scroll-padding-top:calc(80px + env(safe-area-inset-top,0px));}
 .section{display:flex;flex-direction:column;align-items:center;padding:0 0 calc(120px + env(safe-area-inset-bottom,0px));width:100%;max-width:100%;background:var(--bg);transition:background .3s;}
 .section-content{width:100%;max-width:100%;padding:0 16px;overflow:visible;box-sizing:border-box;}
 .section-title-row{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;margin:12px 0 10px;width:100%;text-align:left;gap:4px;}
@@ -1378,7 +1326,7 @@ body.light .yt-channel-item.active span{color:var(--text-primary);}
 .refreshing svg{animation:spinOnce .7s ease forwards;}
 
 /* ══ LIGHT MODE OVERRIDES ════════════════════════════════════ */
-body.light .header-btn{background:transparent;box-shadow:none;color:var(--text-secondary);}body.light .toolbar-btn{background:rgba(0,0,0,.05);box-shadow:0px 2px 8px rgba(0,0,0,.1),inset 0px 1px 0px rgba(255,255,255,.8),inset 0px -1px 0px rgba(0,0,0,.06);color:var(--text-primary);}
+body.light body.light .toolbar-btn{background:rgba(0,0,0,.05);box-shadow:0px 2px 8px rgba(0,0,0,.1),inset 0px 1px 0px rgba(255,255,255,.8),inset 0px -1px 0px rgba(0,0,0,.06);color:var(--text-primary);}
 body.light .catalog-tabs{background:rgba(0,0,0,0.04);box-shadow:0px 0px 0px 1px rgba(0,0,0,.08),0px 4px 12px -4px rgba(0,0,0,.12),inset 0px -1px 0px rgba(0,0,0,.06);}
 body.light .catalog-tabs-pill{background:linear-gradient(180deg,rgba(255,255,255,.9) 0%,rgba(255,255,255,.7) 100%);box-shadow:0px 4px 14px rgba(0,0,0,.12),inset 0px 1px 0px rgba(255,255,255,.9),inset 0px -1px 0px rgba(0,0,0,.08);}
 body.light .catalog-tab{color:rgba(0,0,0,.4);}
@@ -2460,7 +2408,7 @@ body {
     .smart-nav{width:440px;}
     .news-list-image{width:140px;min-width:140px;height:100px;}
     header{padding:0 24px;padding-top:var(--safe-top);}
-    header .header-left,.header-right{gap:12px;}
+    header 
 }
 
 /* iPad Pro / desktop (> 1024px) */
@@ -2674,36 +2622,10 @@ body.light .iv-btn-secondary {
 .sheet-btn-secondary:active { transform: scale(.97); }
 
 /* ══ 3. HEADER BUTTONS ═══════════════════════════════════════════ */
-header .header-btn {
-  background: var(--lg-gradient);
-  backdrop-filter: var(--lg-blur);
-  -webkit-backdrop-filter: var(--lg-blur);
-  border: 1px solid var(--lg-border) !important;
-  box-shadow: var(--lg-shadow-sm);
-  width: 38px;
-  height: 38px;
-  border-radius: var(--r-full);
-  transition: transform .15s cubic-bezier(.34,1.56,.64,1), box-shadow .2s, opacity .18s;
-  position: relative;
-  overflow: hidden;
-}
-header .header-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 60%);
-  pointer-events: none;
-  border-radius: inherit;
-}
-header .header-btn:active {
-  transform: scale(.88);
-  opacity: .75;
-}
-body.light header .header-btn {
-  background: var(--lg-gradient);
-  border-color: var(--lg-border) !important;
-  box-shadow: var(--lg-shadow-sm);
-}
+header 
+header 
+header 
+body.light header 
 
 /* ══ 4. TOOLBAR BUTTONS (modal bottom) ══════════════════════════ */
 .toolbar-btn {
@@ -3774,34 +3696,7 @@ body.light .toolbar-btn {
 </div>
 
 <!-- ══ HEADER ════════════════════════════════════════════════ -->
-<header>
-    <div class="header-top-row">
-        <!-- Gauche : menu hamburger style Estrella -->
-        <div class="header-left">
-            <button class="header-menu-btn" onclick="toggleSidebar()">
-                <span class="header-menu-label">Menu</span>
-                <div class="header-menu-lines">
-                    <div class="header-menu-line"></div>
-                    <div class="header-menu-line"></div>
-                </div>
-            </button>
-        </div>
-        <!-- Centre : logo Briefeed éditorial -->
-        <div class="header-logo-center">
-            <div class="header-logo-editorial">
-                <span class="logo logo-wordmark" style="font-size:22px;"><span class="logo-brie">BRIE</span><span class="logo-feed-block"><span class="logo-plain">F</span><span class="logo-e">E</span><span class="logo-plain">ED</span></span></span>
-            </div>
-        </div>
-        <!-- Droite : thème + refresh -->
-        <div class="header-right">
-            <button class="header-btn" id="refreshBtn" onclick="handleRefresh()" title="Actualiser">
-                <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            </button>
-        </div>
-    </div>
-    <!-- Ligne décorative bas du header (style Estrella) -->
-    <div class="header-bottom-line"></div>
-</header>
+
 
 <!-- ══ MAIN ══════════════════════════════════════════════════ -->
 <svg style="display:none;">
