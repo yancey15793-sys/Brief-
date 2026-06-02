@@ -4691,19 +4691,37 @@ body.focus-mode .focus-exit{ display:flex; }
   function _tokens(t){ return new Set((t||'').toLowerCase().split(/\W+/).filter(w=>w.length>3)); }
   function _sim(a,b){ const sa=_tokens(a.title),sb=_tokens(b.title); let inter=0; sa.forEach(w=>{if(sb.has(w))inter++;}); return inter/(sa.size+sb.size-inter||1); }
   function _dedup(arts){
-    const res=[],used=new Set();
-    for(const a of arts){
-      if(used.has(a.link))continue;
-      const dups=arts.filter(b=>b!==a&&!used.has(b.link)&&_sim(a,b)>=.55);
-      dups.forEach(d=>used.add(d.link));
-      used.add(a.link); res.push(a);
+    // 1) Dédup exact par lien — O(n)
+    const byLink = new Set(); const stage = [];
+    for(const a of arts){ if(a.link && byLink.has(a.link)) continue; if(a.link) byLink.add(a.link); stage.push(a); }
+    // 2) Quasi-doublons par titre via index inversé de tokens — quasi-linéaire.
+    //    On ne compare qu'aux articles DÉJÀ gardés partageant ≥1 token signifiant,
+    //    et les tokens de chaque titre sont calculés UNE seule fois (plus de O(n²)
+    //    qui reconstruisait deux Set à chaque paire). Sémantique conservée :
+    //    on garde la 1re occurrence et on jette les suivantes similaires (≥.55).
+    const res = []; const index = new Map(); // token -> [indices dans res]
+    for(const a of stage){
+      const toks = _tokens(a.title);
+      const cand = new Set();
+      toks.forEach(t=>{ const arr = index.get(t); if(arr) arr.forEach(i=>cand.add(i)); });
+      let dup = false;
+      for(const i of cand){
+        const b = res[i]; let inter = 0;
+        toks.forEach(w=>{ if(b._toks.has(w)) inter++; });
+        if(inter/(toks.size + b._toks.size - inter || 1) >= 0.55){ dup = true; break; }
+      }
+      if(dup) continue;
+      a._toks = toks; const idx = res.length; res.push(a);
+      toks.forEach(t=>{ let arr = index.get(t); if(!arr){ arr=[]; index.set(t,arr); } arr.push(idx); });
     }
+    res.forEach(a=>{ delete a._toks; }); // champ temporaire nettoyé
     return res;
   }
 
   // ── 12. État global articles ──────────────────────────────────
   let _allArticles = [];
   let _isLoading = false;
+  let _rerunRequested = false; // un passage demandé pendant qu'un autre tourne
   let _lastLoad = 0;
   const _COOLDOWN = 5*60*1000;
 
@@ -5069,12 +5087,15 @@ body.focus-mode .focus-exit{ display:flex; }
       }
     }catch(e){ if(skel) skel.style.display='block'; }
 
-    // Blocage réseau — force=true contourne le cooldown ET _isLoading
-    if(!force){
-      if(_isLoading) return;
-      if(_allArticles.length && (Date.now()-_lastLoad)<_COOLDOWN){ if(skel) skel.style.display='none'; return; }
+    // Verrou anti-réentrance : UN SEUL chargement réseau à la fois.
+    // Avant, force=true remettait juste _isLoading à false puis relançait un
+    // 2e pool en parallèle (ex. ajout d'un flux pendant un refresh) → deux
+    // chargements concurrents mutant le même état. Désormais, si un load tourne
+    // déjà, on note la demande et on relancera UNE fois à la fin.
+    if(_isLoading){ if(force) _rerunRequested = true; return; }
+    if(!force && _allArticles.length && (Date.now()-_lastLoad)<_COOLDOWN){
+      if(skel) skel.style.display='none'; return;
     }
-    if(_isLoading){ _isLoading=false; } // forcer reset si force=true
     _isLoading = true; _lastLoad = Date.now();
     showBadge('', false);
     await new Promise(r=>setTimeout(r,80));
@@ -5130,6 +5151,9 @@ body.focus-mode .focus-exit{ display:flex; }
     if(browseView&&!browseView.hidden) renderBrowseTimeline();
     // Enrichir images en arrière-plan
     setTimeout(()=>_enrichImages(_allArticles),1500);
+    // Un passage forcé a-t-il été demandé pendant ce chargement ? On le rejoue
+    // UNE fois (ex. flux ajouté en cours de route), sans concurrence.
+    if(_rerunRequested){ _rerunRequested = false; loadAllFeeds(true); }
   }
 
   // ── 16. Modal article ─────────────────────────────────────────
